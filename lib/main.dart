@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
+
+import 'api/server.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,9 +37,16 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
+    final client = RestClient(Dio());
+    client.characters().then((it) => print(it.results[0].name));
     setState(() {
       _counter++;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -50,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const CircularProgressIndicator(),
             const Text(
               'You have pushed the button this many times:',
             ),

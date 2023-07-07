@@ -30,6 +30,8 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   retrofit: '>=4.0.0 <5.0.0'
+  dio: ^5.2.1+1
+  json_annotation: ^4.8.1
   logger: any  #for logging purpose
   isar: *isar_version
   isar_flutter_libs: *isar_version # contains Isar Core
