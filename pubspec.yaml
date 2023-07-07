@@ -38,6 +38,7 @@ dependencies:
   mobx: ^2.2.0
   injectable: ^2.1.2
   freezed: ^2.3.5
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

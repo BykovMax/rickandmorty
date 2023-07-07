@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:rickandmorty/domain/character.dart';
+import 'package:rickandmorty/widgets/character_item.dart';
 
 import 'api/server.dart';
 
@@ -35,6 +37,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  final List<Character> items = List<Character>.generate(10000, (i) => Character.demo(i));
 
   void _incrementCounter() {
     final client = RestClient(Dio());
@@ -56,20 +59,16 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const CircularProgressIndicator(),
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      body: ListView.builder(
+        itemCount: items.length,
+        prototypeItem: ListTile(
+          title: CharacterWidget(items.first),
         ),
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: CharacterWidget(items[index]),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
