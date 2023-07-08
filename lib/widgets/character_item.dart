@@ -9,39 +9,39 @@ class CharacterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(character.name),
-                Text(character.status),
-                Text(character.species),
-              ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      child: Card(
+        elevation: 4,
+        clipBehavior: Clip.antiAlias,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(character.name),
+                  Text(character.status),
+                  Text(character.species),
+                ],
+              ),
             ),
-          ),
-          IntrinsicWidth(
-            child: AspectRatio(
-              aspectRatio: 1,
+            SizedBox(
+              width: 100,
+              height: 100,
               child: CachedNetworkImage(
                 imageUrl: character.image,
                 placeholder: (context, url) => const Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: CircularProgressIndicator(),
-                  ),
+                  child: CircularProgressIndicator(),
                 ),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -36,6 +36,8 @@ dependencies:
   isar: *isar_version
   isar_flutter_libs: *isar_version # contains Isar Core
   mobx: ^2.2.0
+  mobx_codegen: ^2.3.0
+  flutter_mobx: ^2.0.6+5
   injectable: ^2.1.2
   freezed: ^2.3.5
   cached_network_image: ^3.2.3
