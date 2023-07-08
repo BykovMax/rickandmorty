@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:rickandmorty/api/models/character.dart';
 import 'package:rickandmorty/api/models/info.dart';
 
 part 'page.g.dart';
