@@ -51,7 +51,10 @@ class CharacterWidget extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CharacterPage(character: character)),
+                    MaterialPageRoute(
+                        builder: (context) => CharacterPage(
+                              characterId: character.id.toString(),
+                            )),
                   );
                 },
               ),
