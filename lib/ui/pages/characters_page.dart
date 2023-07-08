@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:rickandmorty/ui/characters_store.dart';
-import 'package:rickandmorty/widgets/character_item.dart';
+import 'package:rickandmorty/ui/pages/characters_store.dart';
+import 'package:rickandmorty/ui/widgets/character_item.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class CharactersPage extends StatefulWidget {
+  const CharactersPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<CharactersPage> createState() => _CharactersPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _CharactersPageState extends State<CharactersPage> {
   final CharactersStore store = CharactersStore();
 
   @override
@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: store.increment,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
