@@ -1,14 +1,13 @@
-import 'package:dio/dio.dart';
-import 'package:mobx/mobx.dart';
-import 'package:rickandmorty/api/server.dart';
 import 'package:entities/entities.dart';
-
+import 'package:get_it/get_it.dart';
+import 'package:mobx/mobx.dart';
+import 'package:server/server.dart';
 part 'characters_store.g.dart';
 
 class CharactersStore = CharactersStoreBase with _$CharactersStore;
 
 abstract class CharactersStoreBase with Store {
-  final client = RestClient(Dio());
+  final RestClient client = GetIt.instance.get();
 
   @computed
   List<Character> get items {

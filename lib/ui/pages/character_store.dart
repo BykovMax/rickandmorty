@@ -2,7 +2,7 @@ import 'package:entities/entities.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
-import 'package:rickandmorty/api/server.dart';
+import 'package:server/server.dart';
 
 part 'character_store.g.dart';
 
