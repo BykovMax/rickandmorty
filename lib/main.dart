@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:rickandmorty/injection.dart';
 import 'package:rickandmorty/ui/pages/characters_page.dart';
 
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 }
 

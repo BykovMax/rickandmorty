@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:rickandmorty/api/server.dart';
 import 'package:rickandmorty/entities/character.dart';
@@ -9,7 +9,7 @@ part 'character_store.g.dart';
 class CharacterStore = CharacterStoreBase with _$CharacterStore;
 
 abstract class CharacterStoreBase with Store {
-  final client = RestClient(Dio());
+  final RestClient client = GetIt.instance.get();
 
   late final String _id;
   @observable
@@ -24,11 +24,12 @@ abstract class CharacterStoreBase with Store {
     _loading = Loading();
     try {
       final results = await Future.wait([
-        // client.character(_id),
+        client.character(_id),
         Future.delayed(
           const Duration(milliseconds: 1500),
         ),
       ]);
+      print("result: ${results.first}");
       _loading = Result(Character.demo(int.parse(_id))); //todo use  Character via repo
       // }
     } catch (e) {
