@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:rickandmorty/entities/character.dart';
+import 'package:entities/entities.dart';
 import 'package:rickandmorty/ui/pages/character_page.dart';
 
 class CharacterWidget extends StatelessWidget {

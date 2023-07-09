@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:entities/entities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:rickandmorty/entities/character.dart';
 import 'package:rickandmorty/ui/pages/character_store.dart';
 
 class CharacterPage extends StatefulWidget {

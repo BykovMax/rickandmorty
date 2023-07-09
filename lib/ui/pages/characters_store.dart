@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
 import 'package:rickandmorty/api/server.dart';
-import 'package:rickandmorty/entities/character.dart';
+import 'package:entities/entities.dart';
 
 part 'characters_store.g.dart';
 

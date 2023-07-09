@@ -41,6 +41,8 @@ dependencies:
   freezed_annotation: ^2.2.0
   get_it: ^7.6.0
   injectable: ^2.1.2
+  entities:
+    path: modules/entities
 
 
 dev_dependencies:
