@@ -94,7 +94,13 @@ class _CharacterPageState extends State<CharacterPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          if (character.isFavorite) {
+            _store.removeFromFavorites();
+          } else {
+            _store.addToFavorites();
+          }
+        },
         tooltip: 'Add to favorite list',
         child: _favorite(character),
       ),

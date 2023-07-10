@@ -9,7 +9,9 @@ part 'character_store.g.dart';
 class CharacterStore = CharacterStoreBase with _$CharacterStore;
 
 abstract class CharacterStoreBase with Store {
-  final GetCharacterUseCase getCharacterUseCase = GetIt.instance.get();
+  final GetCharacterUseCase _getCharacterUseCase = GetIt.instance.get();
+  final MarkFavouriteUseCase _markFavoriteUseCase = GetIt.instance.get();
+  final MarkUnFavouriteUseCase _markUnFavoriteUseCase = GetIt.instance.get();
 
   late final String _id;
   @observable
@@ -22,19 +24,11 @@ abstract class CharacterStoreBase with Store {
 
   Future<void> _load() async {
     _state = Loading();
-    try {
-      final results = await Future.wait([
-        getCharacterUseCase.getCharacter(_id).first,
-        Future.delayed(
-          const Duration(milliseconds: 250),
-        ),
-      ]);
-      print("result1: ${results.first}");
-      print("result2: ${results[1]}");
-      _state = Result(results.first);
-    } catch (e) {
+    _getCharacterUseCase.getCharacter(_id).listen((event) {
+      _state = Result(event);
+    }, onError: (err) {
       _state = Error();
-    }
+    });
   }
 
   @computed
@@ -44,7 +38,12 @@ abstract class CharacterStoreBase with Store {
 
   @action
   void addToFavorites() {
-    //todo
+    _markFavoriteUseCase.markFavourite(_id);
+  }
+
+  @action
+  void removeFromFavorites() {
+    _markUnFavoriteUseCase.markUnFavourite(_id);
   }
 }
 
