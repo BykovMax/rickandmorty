@@ -1,19 +1,19 @@
+import 'package:domain/domain.dart';
 import 'package:entities/entities.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
-import 'package:server/server.dart';
 
 part 'character_store.g.dart';
 
 class CharacterStore = CharacterStoreBase with _$CharacterStore;
 
 abstract class CharacterStoreBase with Store {
-  final RestClient client = GetIt.instance.get();
+  final GetCharacterUseCase getCharacterUseCase = GetIt.instance.get();
 
   late final String _id;
   @observable
-  LoadingState _loading = Loading();
+  LoadingState _state = Loading();
 
   CharacterStoreBase(String id) {
     _id = id;
@@ -21,25 +21,25 @@ abstract class CharacterStoreBase with Store {
   }
 
   Future<void> _load() async {
-    _loading = Loading();
+    _state = Loading();
     try {
       final results = await Future.wait([
-        client.character(_id),
+        getCharacterUseCase.getCharacter(_id).first,
         Future.delayed(
-          const Duration(milliseconds: 1500),
+          const Duration(milliseconds: 250),
         ),
       ]);
-      print("result: ${results.first}");
-      _loading = Result(Character.demo(int.parse(_id))); //todo use  Character via repo
-      // }
+      print("result1: ${results.first}");
+      print("result2: ${results[1]}");
+      _state = Result(results.first);
     } catch (e) {
-      _loading = Error();
+      _state = Error();
     }
   }
 
   @computed
-  LoadingState get loading {
-    return _loading;
+  LoadingState get state {
+    return _state;
   }
 
   @action

@@ -28,7 +28,7 @@ class _CharacterPageState extends State<CharacterPage> {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
-      final state = _store.loading;
+      final state = _store.state;
       return switch (state) {
         Loading() => const Scaffold(
               body: Center(
@@ -96,16 +96,16 @@ class _CharacterPageState extends State<CharacterPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         tooltip: 'Add to favorite list',
-        child: _favorite(),
+        child: _favorite(character),
       ),
     );
   }
 
-  Widget _favorite() {
-    // if (character.id > 2) {
-    return const Icon(Icons.favorite_border);
-    // } else {
-    //   return const Icon(Icons.favorite);
-    // }
+  Widget _favorite(Character character) {
+    if (character.isFavorite) {
+      return const Icon(Icons.favorite);
+    } else {
+      return const Icon(Icons.favorite_border);
+    }
   }
 }

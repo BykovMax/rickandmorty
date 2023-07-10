@@ -21,6 +21,7 @@ mixin _$Character {
   String get species => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
+  bool get isFavorite => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CharacterCopyWith<Character> get copyWith =>
@@ -32,7 +33,13 @@ abstract class $CharacterCopyWith<$Res> {
   factory $CharacterCopyWith(Character value, $Res Function(Character) then) =
       _$CharacterCopyWithImpl<$Res, Character>;
   @useResult
-  $Res call({int id, String name, String species, String status, String image});
+  $Res call(
+      {int id,
+      String name,
+      String species,
+      String status,
+      String image,
+      bool isFavorite});
 }
 
 /// @nodoc
@@ -53,6 +60,7 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
     Object? species = null,
     Object? status = null,
     Object? image = null,
+    Object? isFavorite = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -75,6 +83,10 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -86,7 +98,13 @@ abstract class _$$_CharacterCopyWith<$Res> implements $CharacterCopyWith<$Res> {
       __$$_CharacterCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, String species, String status, String image});
+  $Res call(
+      {int id,
+      String name,
+      String species,
+      String status,
+      String image,
+      bool isFavorite});
 }
 
 /// @nodoc
@@ -105,6 +123,7 @@ class __$$_CharacterCopyWithImpl<$Res>
     Object? species = null,
     Object? status = null,
     Object? image = null,
+    Object? isFavorite = null,
   }) {
     return _then(_$_Character(
       null == id
@@ -127,6 +146,10 @@ class __$$_CharacterCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
+      null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -134,7 +157,8 @@ class __$$_CharacterCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Character implements _Character {
-  const _$_Character(this.id, this.name, this.species, this.status, this.image);
+  const _$_Character(this.id, this.name, this.species, this.status, this.image,
+      this.isFavorite);
 
   @override
   final int id;
@@ -146,10 +170,12 @@ class _$_Character implements _Character {
   final String status;
   @override
   final String image;
+  @override
+  final bool isFavorite;
 
   @override
   String toString() {
-    return 'Character(id: $id, name: $name, species: $species, status: $status, image: $image)';
+    return 'Character(id: $id, name: $name, species: $species, status: $status, image: $image, isFavorite: $isFavorite)';
   }
 
   @override
@@ -161,12 +187,14 @@ class _$_Character implements _Character {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.species, species) || other.species == species) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.image, image) || other.image == image));
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.isFavorite, isFavorite) ||
+                other.isFavorite == isFavorite));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, species, status, image);
+      Object.hash(runtimeType, id, name, species, status, image, isFavorite);
 
   @JsonKey(ignore: true)
   @override
@@ -181,7 +209,8 @@ abstract class _Character implements Character {
       final String name,
       final String species,
       final String status,
-      final String image) = _$_Character;
+      final String image,
+      final bool isFavorite) = _$_Character;
 
   @override
   int get id;
@@ -193,6 +222,8 @@ abstract class _Character implements Character {
   String get status;
   @override
   String get image;
+  @override
+  bool get isFavorite;
   @override
   @JsonKey(ignore: true)
   _$$_CharacterCopyWith<_$_Character> get copyWith =>

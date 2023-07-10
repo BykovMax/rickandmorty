@@ -4,5 +4,4 @@
 library;
 
 export 'injection.dart' show configureDependencies;
-export 'src/models/character.dart';
-export 'src/server.dart';
+export 'src/get_character_use_case.dart';

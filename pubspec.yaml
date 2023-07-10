@@ -43,8 +43,8 @@ dependencies:
   injectable: ^2.1.2
   entities:
     path: modules/entities
-  server:
-    path: modules/server
+  domain:
+    path: modules/domain
 
 
 dev_dependencies:

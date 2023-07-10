@@ -12,24 +12,22 @@ mixin _$CharacterStore on CharacterStoreBase, Store {
   Computed<LoadingState>? _$loadingComputed;
 
   @override
-  LoadingState get loading =>
-      (_$loadingComputed ??= Computed<LoadingState>(() => super.loading,
-              name: 'CharacterStoreBase.loading'))
-          .value;
+  LoadingState get state => (_$loadingComputed ??=
+          Computed<LoadingState>(() => super.state, name: 'CharacterStoreBase.loading'))
+      .value;
 
-  late final _$_loadingAtom =
-      Atom(name: 'CharacterStoreBase._loading', context: context);
+  late final _$_loadingAtom = Atom(name: 'CharacterStoreBase._loading', context: context);
 
   @override
-  LoadingState get _loading {
+  LoadingState get _state {
     _$_loadingAtom.reportRead();
-    return super._loading;
+    return super._state;
   }
 
   @override
-  set _loading(LoadingState value) {
-    _$_loadingAtom.reportWrite(value, super._loading, () {
-      super._loading = value;
+  set _state(LoadingState value) {
+    _$_loadingAtom.reportWrite(value, super._state, () {
+      super._state = value;
     });
   }
 
@@ -38,8 +36,8 @@ mixin _$CharacterStore on CharacterStoreBase, Store {
 
   @override
   void addToFavorites() {
-    final _$actionInfo = _$CharacterStoreBaseActionController.startAction(
-        name: 'CharacterStoreBase.addToFavorites');
+    final _$actionInfo =
+        _$CharacterStoreBaseActionController.startAction(name: 'CharacterStoreBase.addToFavorites');
     try {
       return super.addToFavorites();
     } finally {
@@ -50,7 +48,7 @@ mixin _$CharacterStore on CharacterStoreBase, Store {
   @override
   String toString() {
     return '''
-loading: ${loading}
+loading: ${state}
     ''';
   }
 }
