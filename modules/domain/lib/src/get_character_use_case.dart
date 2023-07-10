@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:entities/entities.dart' as entity;
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:repository/repository.dart';
 import 'package:server/server.dart';
 
 @injectable
 class GetCharacterUseCase {
   final RestClient client = GetIt.instance.get();
+  final Repository repository = GetIt.instance.get();
 
   Stream<entity.Character> getCharacter(String id) async* {
     final character = await client.character(id);
@@ -23,12 +25,11 @@ class GetCharacterUseCase {
       character.species!,
       character.status!,
       character.image!,
-      await getFavoriteById(character.id!.toString()),
+      await getFavouriteById(character.id!.toString()),
     );
   }
 
-  Future<bool> getFavoriteById(String id) async {
-    Future.delayed(Duration(milliseconds: 200));
-    return false;
+  Future<bool> getFavouriteById(String id) async {
+    return repository.isFavourite(id).first;
   }
 }

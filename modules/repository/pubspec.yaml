@@ -1,4 +1,4 @@
-name: domain
+name: repository
 description: A starting point for Dart libraries or applications.
 version: 1.0.0
 publish_to: 'none'
@@ -7,16 +7,11 @@ publish_to: 'none'
 environment:
   sdk: ^3.0.5
 
+# Add regular dependencies here.
 dependencies:
+  rx_shared_preferences: ^3.0.0
   get_it: ^7.6.0
   injectable: ^2.1.2
-  rxdart: ^0.27.7
-  entities:
-    path: ../entities
-  server:
-    path: ../server
-  repository:
-    path: ../repository
 
 dev_dependencies:
   lints: ^2.0.0
