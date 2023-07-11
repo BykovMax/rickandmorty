@@ -90,82 +90,76 @@ class _CharactersPageState extends State<CharactersPage> {
   Future<void> buildShowModalBottomSheet(BuildContext context) {
     return showModalBottomSheet<void>(
       context: context,
+      isScrollControlled: true,
       builder: (BuildContext context) {
-        return FittedBox(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: 100,
-              minWidth: MediaQuery.of(context).size.width,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      FilledButton(
-                          child: const Text('Clear Filter'),
-                          onPressed: () {
-                            store.clearFilter();
-                            Navigator.pop(context);
-                          }),
-                    ],
-                  ),
-                  const Text('Gender'),
-                  Observer(
-                      builder: (context) => Wrap(
-                            spacing: 8,
-                            children: CharacterGender.values
-                                .where((element) => element != CharacterGender.empty)
-                                .map((e) => ChoiceChip(
-                                      label: Text(e.value),
-                                      selected: store.filter.gender == e,
-                                      onSelected: (bool selected) {
-                                        setState(() {
-                                          store.setGender(selected ? e : CharacterGender.empty);
-                                        });
-                                      },
-                                    ))
-                                .toList(),
-                          )),
-                  const Text('Status'),
-                  Observer(
-                      builder: (context) => Wrap(
-                            spacing: 8,
-                            children: CharacterStatus.values
-                                .where((element) => element != CharacterStatus.empty)
-                                .map((e) => ChoiceChip(
-                                      label: Text(e.value),
-                                      selected: store.filter.status == e,
-                                      onSelected: (bool selected) {
-                                        setState(() {
-                                          store.setStatus(selected ? e : CharacterStatus.empty);
-                                        });
-                                      },
-                                    ))
-                                .toList(),
-                          )),
-                  const Text('Species'),
-                  Observer(
-                      builder: (context) => Wrap(
-                            spacing: 8,
-                            children: CharacterSpecies.values
-                                .where((element) => element != CharacterSpecies.empty)
-                                .map((e) => ChoiceChip(
-                                      label: Text(e.value),
-                                      selected: store.filter.species == e,
-                                      onSelected: (bool selected) {
-                                        setState(() {
-                                          store.setSpecies(selected ? e : CharacterSpecies.empty);
-                                        });
-                                      },
-                                    ))
-                                .toList(),
-                          )),
+                  FilledButton(
+                      child: const Text('Clear Filter'),
+                      onPressed: () {
+                        store.clearFilter();
+                        Navigator.pop(context);
+                      }),
                 ],
               ),
-            ),
+              const Text('Gender'),
+              Observer(
+                  builder: (context) => Wrap(
+                        spacing: 8,
+                        children: CharacterGender.values
+                            .where((element) => element != CharacterGender.empty)
+                            .map((e) => ChoiceChip(
+                                  label: Text(e.value),
+                                  selected: store.filter.gender == e,
+                                  onSelected: (bool selected) {
+                                    setState(() {
+                                      store.setGender(selected ? e : CharacterGender.empty);
+                                    });
+                                  },
+                                ))
+                            .toList(),
+                      )),
+              const Text('Status'),
+              Observer(
+                  builder: (context) => Wrap(
+                        spacing: 8,
+                        children: CharacterStatus.values
+                            .where((element) => element != CharacterStatus.empty)
+                            .map((e) => ChoiceChip(
+                                  label: Text(e.value),
+                                  selected: store.filter.status == e,
+                                  onSelected: (bool selected) {
+                                    setState(() {
+                                      store.setStatus(selected ? e : CharacterStatus.empty);
+                                    });
+                                  },
+                                ))
+                            .toList(),
+                      )),
+              const Text('Species'),
+              Observer(
+                  builder: (context) => Wrap(
+                        spacing: 8,
+                        children: CharacterSpecies.values
+                            .where((element) => element != CharacterSpecies.empty)
+                            .map((e) => ChoiceChip(
+                                  label: Text(e.value),
+                                  selected: store.filter.species == e,
+                                  onSelected: (bool selected) {
+                                    setState(() {
+                                      store.setSpecies(selected ? e : CharacterSpecies.empty);
+                                    });
+                                  },
+                                ))
+                            .toList(),
+                      )),
+            ],
           ),
         );
       },
