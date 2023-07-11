@@ -16,6 +16,20 @@ mixin _$CharactersStore on CharactersStoreBase, Store {
       (_$stateComputed ??= Computed<LoadingStateCharacters>(() => super.state,
               name: 'CharactersStoreBase.state'))
           .value;
+  Computed<Filter>? _$filterComputed;
+
+  @override
+  Filter get filter =>
+      (_$filterComputed ??= Computed<Filter>(() => super.filter,
+              name: 'CharactersStoreBase.filter'))
+          .value;
+  Computed<bool>? _$isFilterActiveComputed;
+
+  @override
+  bool get isFilterActive =>
+      (_$isFilterActiveComputed ??= Computed<bool>(() => super.isFilterActive,
+              name: 'CharactersStoreBase.isFilterActive'))
+          .value;
 
   late final _$_stateAtom =
       Atom(name: 'CharactersStoreBase._state', context: context);
@@ -49,10 +63,70 @@ mixin _$CharactersStore on CharactersStoreBase, Store {
     });
   }
 
+  late final _$CharactersStoreBaseActionController =
+      ActionController(name: 'CharactersStoreBase', context: context);
+
+  @override
+  void typeSearch(String text) {
+    final _$actionInfo = _$CharactersStoreBaseActionController.startAction(
+        name: 'CharactersStoreBase.typeSearch');
+    try {
+      return super.typeSearch(text);
+    } finally {
+      _$CharactersStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setGender(CharacterGender gender) {
+    final _$actionInfo = _$CharactersStoreBaseActionController.startAction(
+        name: 'CharactersStoreBase.setGender');
+    try {
+      return super.setGender(gender);
+    } finally {
+      _$CharactersStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setSpecies(CharacterSpecies species) {
+    final _$actionInfo = _$CharactersStoreBaseActionController.startAction(
+        name: 'CharactersStoreBase.setSpecies');
+    try {
+      return super.setSpecies(species);
+    } finally {
+      _$CharactersStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setStatus(CharacterStatus status) {
+    final _$actionInfo = _$CharactersStoreBaseActionController.startAction(
+        name: 'CharactersStoreBase.setStatus');
+    try {
+      return super.setStatus(status);
+    } finally {
+      _$CharactersStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void clearFilter() {
+    final _$actionInfo = _$CharactersStoreBaseActionController.startAction(
+        name: 'CharactersStoreBase.clearFilter');
+    try {
+      return super.clearFilter();
+    } finally {
+      _$CharactersStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
-state: ${state}
+state: ${state},
+filter: ${filter},
+isFilterActive: ${isFilterActive}
     ''';
   }
 }

@@ -1,3 +1,4 @@
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:rickandmorty/ui/pages/characters_store.dart';
@@ -71,13 +72,18 @@ class _CharactersPageState extends State<CharactersPage> {
             ),
         };
       }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          buildShowModalBottomSheet(context);
-        },
-        tooltip: 'Filter',
-        child: const Icon(Icons.filter_list),
-      ),
+      floatingActionButton: Observer(builder: (context) {
+        return FloatingActionButton(
+          onPressed: () {
+            buildShowModalBottomSheet(context);
+          },
+          tooltip: 'Filter',
+          child: Icon(
+            Icons.filter_list,
+            color: store.isFilterActive ? Colors.redAccent : Colors.black,
+          ),
+        );
+      }),
     );
   }
 
@@ -91,31 +97,72 @@ class _CharactersPageState extends State<CharactersPage> {
               minHeight: 100,
               minWidth: MediaQuery.of(context).size.width,
             ),
-            child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      ElevatedButton(
-                        child: const Text('Close BottomSheet'),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                      ElevatedButton(
-                        child: const Text('Clear Filter'),
-                        onPressed: () => Navigator.pop(context),
-                      ),
+                      FilledButton(
+                          child: const Text('Clear Filter'),
+                          onPressed: () {
+                            store.clearFilter();
+                            Navigator.pop(context);
+                          }),
                     ],
                   ),
-                  // Observer(
-                  //   builder: (_) => ListView.builder(
-                  //     itemCount: store.items.length,
-                  //     itemBuilder: (context, index) {
-                  //       return ListTile(
-                  //         title: Text(store.items[index].name),
-                  //       );
-                  //     },
-                  //   ),
-                  // ),
+                  const Text('Gender'),
+                  Observer(
+                      builder: (context) => Wrap(
+                            spacing: 8,
+                            children: CharacterGender.values
+                                .where((element) => element != CharacterGender.empty)
+                                .map((e) => ChoiceChip(
+                                      label: Text(e.value),
+                                      selected: store.filter.gender == e,
+                                      onSelected: (bool selected) {
+                                        setState(() {
+                                          store.setGender(selected ? e : CharacterGender.empty);
+                                        });
+                                      },
+                                    ))
+                                .toList(),
+                          )),
+                  const Text('Status'),
+                  Observer(
+                      builder: (context) => Wrap(
+                            spacing: 8,
+                            children: CharacterStatus.values
+                                .where((element) => element != CharacterStatus.empty)
+                                .map((e) => ChoiceChip(
+                                      label: Text(e.value),
+                                      selected: store.filter.status == e,
+                                      onSelected: (bool selected) {
+                                        setState(() {
+                                          store.setStatus(selected ? e : CharacterStatus.empty);
+                                        });
+                                      },
+                                    ))
+                                .toList(),
+                          )),
+                  const Text('Species'),
+                  Observer(
+                      builder: (context) => Wrap(
+                            spacing: 8,
+                            children: CharacterSpecies.values
+                                .where((element) => element != CharacterSpecies.empty)
+                                .map((e) => ChoiceChip(
+                                      label: Text(e.value),
+                                      selected: store.filter.species == e,
+                                      onSelected: (bool selected) {
+                                        setState(() {
+                                          store.setSpecies(selected ? e : CharacterSpecies.empty);
+                                        });
+                                      },
+                                    ))
+                                .toList(),
+                          )),
                 ],
               ),
             ),

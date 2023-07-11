@@ -35,9 +35,57 @@ abstract class CharactersStoreBase with Store {
   @observable
   Filter _filter = Filter.empty();
 
+  @computed
+  Filter get filter {
+    return _filter;
+  }
+
+  @computed
+  bool get isFilterActive {
+    var conditions = [
+      _filter.species == CharacterSpecies.empty,
+      _filter.status == CharacterStatus.empty,
+      _filter.gender == CharacterGender.empty
+    ];
+    var foundUnClear = false;
+    for (var item in conditions) {
+      if (!item) {
+        foundUnClear = true;
+        break;
+      }
+    }
+    return foundUnClear;
+  }
+
   @action
   void typeSearch(String text) {
-    _filter = _filter.copyWith(query: text);
+    _updateFilter(_filter.copyWith(query: text));
+  }
+
+  @action
+  void setGender(CharacterGender gender) {
+    _updateFilter(_filter.copyWith(gender: gender));
+  }
+
+  @action
+  void setSpecies(CharacterSpecies species) {
+    _updateFilter(_filter.copyWith(species: species));
+  }
+
+  @action
+  void setStatus(CharacterStatus status) {
+    _updateFilter(_filter.copyWith(status: status));
+  }
+
+  @action
+  void clearFilter() {
+    _updateFilter(Filter.empty().copyWith(query: _filter.query));
+  }
+
+  void _updateFilter(Filter filter) {
+    if (_filter == filter) return;
+    _state = Loading();
+    _filter = filter;
     _searchCharactersUseCase.updateFilter(_filter);
   }
 }
