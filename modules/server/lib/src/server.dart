@@ -14,7 +14,12 @@ abstract class RestClient {
   factory RestClient(Dio dio) = _RestClient;
 
   @GET("/api/character/")
-  Future<Page<Character>> characters();
+  Future<Page<Character>> searchCharacters(
+    @Query("name") String query,
+    @Query("species") String species,
+    @Query("status") String status,
+    @Query("gender") String gender,
+  );
 
   @GET("/api/character/{id}")
   Future<Character> character(@Path("id") String id);

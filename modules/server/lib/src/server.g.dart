@@ -19,9 +19,19 @@ class _RestClient implements RestClient {
   String? baseUrl;
 
   @override
-  Future<Page<Character>> characters() async {
+  Future<Page<Character>> searchCharacters(
+    query,
+    species,
+    status,
+    gender,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'name': query,
+      r'species': species,
+      r'status': status,
+      r'gender': gender,
+    };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
